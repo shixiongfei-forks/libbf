@@ -166,8 +166,11 @@ int dbuf_putstr(DynBuf *s, const char *str)
     return dbuf_put(s, (const uint8_t *)str, strlen(str));
 }
 
-int __attribute__((format(printf, 2, 3))) dbuf_printf(DynBuf *s,
-                                                      const char *fmt, ...)
+int
+#ifndef _MSC_VER
+__attribute__((format(printf, 2, 3)))
+#endif
+dbuf_printf(DynBuf *s, const char *fmt, ...)
 {
     va_list ap;
     char buf[128];
@@ -200,5 +203,3 @@ void dbuf_free(DynBuf *s)
     }
     memset(s, 0, sizeof(*s));
 }
-
-#endif

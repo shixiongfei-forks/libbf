@@ -27,10 +27,14 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#ifdef _MSC_VER
+#define LIMB_LOG2_BITS 5
+#else
 #if INTPTR_MAX >= INT64_MAX
 #define LIMB_LOG2_BITS 6
 #else
 #define LIMB_LOG2_BITS 5
+#endif
 #endif
 
 #define LIMB_BITS (1 << LIMB_LOG2_BITS)
